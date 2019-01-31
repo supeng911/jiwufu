@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { View, OpenData, Image, Text, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import IconBean from '../../assets/icon_bean.png'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
 
@@ -28,6 +29,10 @@ class Index extends Component {
     navigationStyle: 'custom'
   }
 
+  state = {
+    beansNum: 1000,
+  }
+
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
@@ -40,12 +45,32 @@ class Index extends Component {
 
   render () {
     return (
-      <View className='index'>
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+      <View className='index-root'>
+        <View className='header-info' >
+          header-info
+        </View>
+
+        <View className='main-container'>
+          main-container
+        </View>
+
+
+        <View className='footer-info'>
+          <View className='my-info'>
+            <View className='my-face' >
+              <OpenData className='open-data-face' type='userAvatarUrl' />
+            </View>
+            <View className='my-nick-name'>
+              <OpenData className='name' type='userNickName' />
+              <View className='num'>
+                <Image className='bean' src={IconBean} />
+                <Text>{this.state.beansNum}</Text>
+              </View>
+            </View>
+          </View>
+
+          <Button className='money-btn'>充值</Button>
+        </View>
       </View>
     )
   }
