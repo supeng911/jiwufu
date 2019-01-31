@@ -2,6 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, OpenData, Image, Text, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import IconBean from '../../assets/icon_bean.png'
+import ImgHuahuaka from '../../assets/img_huahuaka.png'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
 
@@ -51,7 +52,7 @@ class Index extends Component {
         </View>
 
         <View className='main-container'>
-          main-container
+          <Image className='img' src={ImgHuahuaka} />
         </View>
 
 
@@ -68,7 +69,6 @@ class Index extends Component {
               </View>
             </View>
           </View>
-
           <Button className='money-btn'>充值</Button>
         </View>
       </View>
