@@ -1,0 +1,15 @@
+{
+	"miniprogramRoot": "dist/",
+	"projectname": "%E4%BA%94%E7%A6%8F%20%E8%8A%B1%E8%8A%B1%E5%8D%A1%E5%A4%A7%E6%B4%BE%E9%80%81",
+	"description": "wx786f4d56d9bb77ca",
+	"appid": "touristappid",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"condition": {}
+}
