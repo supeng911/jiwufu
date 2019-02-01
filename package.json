@@ -33,6 +33,8 @@
     "@tarojs/taro-tt": "1.2.4",
     "@tarojs/taro-weapp": "1.2.4",
     "classnames": "^2.2.6",
+    "dva-core": "^1.4.0",
+    "dva-loading": "^2.0.6",
     "nerv-devtools": "^1.3.9",
     "nervjs": "^1.3.9",
     "redux": "^4.0.0",

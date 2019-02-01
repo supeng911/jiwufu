@@ -5,30 +5,24 @@ import classnames from 'classnames'
 import IconBean from '../../assets/icon_bean.png'
 import ImgHuahuaka from '../../assets/img_huahuaka.png'
 import ImgPayBackground from '../../assets/img_pay_background.png'
+import IconClose from '../../assets/icon-close.png'
+import ImgNotPrize from '../../assets/img_not_prize.png'
+import ImgPrizeAgainBtn from '../../assets/img_prize_again.png'
+
 // pay
 import PayImg6 from '../../assets/pay-img-6.png'
 import PayImg30 from '../../assets/pay-img-30.png'
 import PayImg68 from '../../assets/pay-img-68.png'
 import PayImg168 from '../../assets/pay-img-168.png'
+// utils
+import payment from '../../utils/payment'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
 
 import './index.less'
 
 
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
+@connect(state => state)
 class Index extends Component {
 
   config = {
@@ -41,6 +35,7 @@ class Index extends Component {
     beansNum: 1000,
     showMask: false,
     showPayment: false,
+    showNotPrize: false,
   }
 
   componentWillReceiveProps (nextProps) {
@@ -63,14 +58,29 @@ class Index extends Component {
     this.setState({showMask: true, showPayment: true})
   }
 
+  handleShowPrize = () => {
+    this.setState({showMask: true, showNotPrize: true})
+  }
+
+  handleCloseAll = () => {
+    this.setState({showMask: false, showPayment: false, showNotPrize: false})
+  }
+
+  handlePayment = (moeny, e) => {
+    payment(moeny)
+    console.log('show moeny', moeny)
+  }
+
   render () {
+    console.log(111, this.props)
+
     return (
       <View className='main-root'>
         <View className='title'>this is title</View>
         <View className='container'>
           <View className='top-info'><View className='top-img' /></View>
           <View className='center-info'>
-            <Image className='huahuaka-img' src={ImgHuahuaka} />
+            <Image className='huahuaka-img' src={ImgHuahuaka} onClick={this.handleShowPrize} />
           </View>
           <View className='footer-info'>
             <View className='bottom-container'>
@@ -91,17 +101,21 @@ class Index extends Component {
           </View>
         </View>
 
-
         <View className={classnames('mask', {show: this.state.showMask})} />
 
         <View className={classnames('payment-root', {show: this.state.showPayment})}>
           <Image className='pay_bg' src={ImgPayBackground} />
-          <View className='pay pay_6' ><Image src={PayImg6} /></View>
-          <View className='pay pay_30' ><Image src={PayImg30} /></View>
-          <View className='pay pay_68' ><Image src={PayImg68} /></View>
-          <View className='pay pay_168' ><Image src={PayImg168} /></View>
+          <Image className='icon-close' src={IconClose} onClick={this.handleCloseAll} />
+          <View className='pay pay_6' onClick={this.handlePayment.bind(this, 6)} ><Image src={PayImg6} /></View>
+          <View className='pay pay_30' onClick={this.handlePayment.bind(this, 30)}><Image src={PayImg30} /></View>
+          <View className='pay pay_68' onClick={this.handlePayment.bind(this, 68)}><Image src={PayImg68} /></View>
+          <View className='pay pay_168' onClick={this.handlePayment.bind(this, 168)}><Image src={PayImg168} /></View>
         </View>
 
+        <View className={classnames('no-prize', {show: this.state.showNotPrize})}>
+          <Image className='img-not-prize' src={ImgNotPrize} />
+          <Image className='img-again-btn' src={ImgPrizeAgainBtn} onClick={this.handleCloseAll} />
+        </View>
 
       </View>
     )

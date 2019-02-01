@@ -1,10 +1,12 @@
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
+import dva from './dva'
+import models from './model'
 
 import Index from './pages/index'
 
-import configStore from './store'
+// import configStore from './store'
 
 import './app.less'
 
@@ -14,7 +16,17 @@ import './app.less'
 //   require('nerv-devtools')
 // }
 
-const store = configStore()
+// const store = configStore()
+
+const dvaApp = dva.createApp({
+  initialState: {},
+  models: models,
+  onError(e, dispatch) {
+    console.log('has error,')
+    // dispatch(action("sys/error", e));
+  },
+});
+const store = dvaApp.getStore();
 
 class App extends Component {
 

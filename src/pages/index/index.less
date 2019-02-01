@@ -161,28 +161,67 @@
     width: 750px;
     height: 700px;
   }
+  .icon-close {
+    position: absolute;
+    z-index: 2;
+    width: 45px;
+    height: 45px;
+    left: 615px;
+    top: 200px;
+  }
   .pay {
     position: absolute;
     z-index: 2;
     image {
-      width: 241px;
-      height: 158px;
+      width: 230px;
+      height: 150px;
     }
   }
   .pay_6 {
-    top: 360px;
+    top: 355px;
     left: 140px;
   }
   .pay_30 {
-    top: 360px;
-    left: 410px;
+    top: 355px;
+    left: 380px;
   }
   .pay_68 {
-    top: 520px;
+    top: 515px;
     left: 140px;
   }
   .pay_168 {
-    top: 520px;
-    left: 410px;
+    top: 515px;
+    left: 380px;
   }
+}
+
+.no-prize {
+  display: block;
+  width: 750px;
+  height: 700px;
+  position: fixed;
+  top: 50%;
+  margin-top: -350px;
+  z-index: 1010;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 300ms cubic-bezier(0.36, 0.66, 0.04, 1) 200ms;
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .img-not-prize {
+    margin: 0 auto;
+    display: block;
+    width: 750px;
+    height: 530px;
+  }
+  .img-again-btn {
+    display: block;
+    margin: 40px auto 0;
+    width: 230px;
+    height: 95px;
+  }
+
 }
