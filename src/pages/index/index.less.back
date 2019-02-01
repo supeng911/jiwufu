@@ -1,62 +1,57 @@
-//page {
-//  width: 100vw;
-//  height: 100vh;
-//  background-color: #1F1F37;
-//}
-
-.main-root {
+page {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-top: 50px;
-  box-sizing: border-box;
   background-color: #1F1F37;
 }
 
-.title {
-  width: 100%;
-  height: 50px;
-  flex-shrink: 0;
-  background-color: aqua;
+.base-root {
+  display: block;
+  width: 100vw;
+  height: 100vh;
 }
 
-.container {
+
+
+.index-root {
   width: 100vw;
-  height: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  //justify-content: space-between;
   align-items: center;
-  color: white;
-  padding: 50px 0;
-  .top-info {
-    width: 100vw;
-  }
-  .center-info {
-    width: 100vw;
-  }
-  .footer-info {
-    width: 100vw;
-  }
 }
 
-.top-img {
-  margin: 0 auto;
-  width: 520px;
-  height: 110px;
-  background-image: url("../../assets/header.png");
-  background-repeat: no-repeat;
-  background-size: 520px 110px;
-}
-
-.bottom-container {
+.header-info {
+  height: 250px;
   width: 100%;
-  display: flex;
+  background-color: red;
+  color: white;
+}
+
+.main-container {
+  display: block;
   box-sizing: border-box;
-  align-items: center;
+  width: 100%;
   padding: 0 80px;
+  .img {
+    display: block;
+    width: 590px;
+    height: 843px;
+  }
+}
+
+.footer-info {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  position: fixed;
+  width: 100%;
+  left: 0px;
+  bottom: 50px;
+  padding: 0 80px;
 
   .my-info {
     display: flex;
@@ -65,8 +60,6 @@
       box-sizing: border-box;
       border: 5px solid #F8DB8F;
       border-radius: 50%;
-      width: 85px;
-      height: 85px;
     }
     .open-data-face {
       display: block;
@@ -75,8 +68,9 @@
       border-radius: 50%;
       overflow: hidden;
       padding: 0;
-      margin: 7px;
+      margin: 10px;
     }
+
     .my-nick-name {
       display: block;
       color: #F8DB8F;
@@ -94,6 +88,8 @@
         }
       }
     }
+
+
   }
 
   .money-btn {
@@ -102,7 +98,7 @@
     font-size: 36px;
     line-height: 54px;
     height: 54px;
-    border-radius: 15px;
+    border-radius: 5px;
     background-color: #F8DB8F;
     border: 2px solid #B06F2E;
     color: #B06F2E;
@@ -110,9 +106,3 @@
   }
 }
 
-.huahuaka-img {
-  display: block;
-  margin: 0 auto;
-  width: 590px;
-  height: 843px;
-}

@@ -35,42 +35,50 @@ class Index extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
+    // console.log(this.props, nextProps)
   }
 
   componentWillUnmount () { }
 
-  componentDidShow () { }
+  componentDidShow () {
+    // const backgroundAudioManager = Taro.getBackgroundAudioManager()
+    // backgroundAudioManager.src = 'https://file.vbao100.com/weapp/background.mp3'
+    // backgroundAudioManager.title = '背景音乐'
+    // backgroundAudioManager.play()
+    // console.log('componentDidShow')
+  }
 
   componentDidHide () { }
 
   render () {
     return (
-      <View className='index-root'>
-        <View className='header-info' >
-          header-info
-        </View>
+      <View className='main-root'>
+        <View className='title'>this is title</View>
 
-        <View className='main-container'>
-          <Image className='img' src={ImgHuahuaka} />
-        </View>
-
-
-        <View className='footer-info'>
-          <View className='my-info'>
-            <View className='my-face' >
-              <OpenData className='open-data-face' type='userAvatarUrl' />
-            </View>
-            <View className='my-nick-name'>
-              <OpenData className='name' type='userNickName' />
-              <View className='num'>
-                <Image className='bean' src={IconBean} />
-                <Text>{this.state.beansNum}</Text>
+        <View className='container'>
+          <View className='top-info'><View className='top-img' /></View>
+          <View className='center-info'>
+            <Image className='huahuaka-img' src={ImgHuahuaka} />
+          </View>
+          <View className='footer-info'>
+            <View className='bottom-container'>
+              <View className='my-info'>
+                <View className='my-face' >
+                  <OpenData className='open-data-face' type='userAvatarUrl' />
+                </View>
+                <View className='my-nick-name'>
+                  <OpenData className='name' type='userNickName' />
+                  <View className='num'>
+                    <Image className='bean' src={IconBean} />
+                    <Text>{this.state.beansNum}</Text>
+                  </View>
+                </View>
               </View>
+              <Button className='money-btn'>充值</Button>
             </View>
           </View>
-          <Button className='money-btn'>充值</Button>
         </View>
+
       </View>
     )
   }
