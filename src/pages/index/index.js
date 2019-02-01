@@ -2,27 +2,32 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, OpenData, Image, Text, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import classnames from 'classnames'
+import ImgTitle from '../../assets/title.png'
 import IconBean from '../../assets/icon_bean.png'
 import ImgHuahuaka from '../../assets/img_huahuaka.png'
-import ImgPayBackground from '../../assets/img_pay_background.png'
-import IconClose from '../../assets/icon-close.png'
+
 import ImgNotPrize from '../../assets/img_not_prize.png'
 import ImgPrizeAgainBtn from '../../assets/img_prize_again.png'
+import ImgNeedShare from '../../assets/img_need_share.png'
 
 // pay
-import PayImg6 from '../../assets/pay-img-6.png'
-import PayImg30 from '../../assets/pay-img-30.png'
-import PayImg68 from '../../assets/pay-img-68.png'
-import PayImg168 from '../../assets/pay-img-168.png'
+// import ImgPayBackground from '../../assets/img_pay_background.png'
+// import IconClose from '../../assets/icon-close.png'
+// import PayImg6 from '../../assets/pay-img-6.png'
+// import PayImg30 from '../../assets/pay-img-30.png'
+// import PayImg68 from '../../assets/pay-img-68.png'
+// import PayImg168 from '../../assets/pay-img-168.png'
 // utils
-import payment from '../../utils/payment'
-
-import { add, minus, asyncAdd } from '../../actions/counter'
 
 import './index.less'
 
 
-@connect(state => state)
+
+@connect(state => {
+  return {
+    beanCount: state.beans.count
+  }
+})
 class Index extends Component {
 
   config = {
@@ -32,17 +37,32 @@ class Index extends Component {
   }
 
   state = {
-    beansNum: 1000,
     showMask: false,
     showPayment: false,
     showNotPrize: false,
+    showNeedShare: false,
   }
 
-  componentWillReceiveProps (nextProps) {
-    // console.log(this.props, nextProps)
+  // 设置分享
+  onShareAppMessage() {
+    this.setState({showMask: false, showNeedShare: false})
+    this.props.dispatch({
+      type: 'beans/addCount'
+    })
+
+    return {
+      title: '花花卡大派送！',
+      path: '/pages/index/index',
+    }
   }
 
-  componentWillUnmount () { }
+  componentDidMount() {
+    // 初始化豆子数量
+    this.props.dispatch({
+      type: 'beans/fetch'
+    })
+  }
+
 
   componentDidShow () {
     // const backgroundAudioManager = Taro.getBackgroundAudioManager()
@@ -54,12 +74,22 @@ class Index extends Component {
 
   componentDidHide () { }
 
-  handleShowPayment = () => {
-    this.setState({showMask: true, showPayment: true})
-  }
 
+  // 显示未中奖
   handleShowPrize = () => {
-    this.setState({showMask: true, showNotPrize: true})
+    const {beanCount} = this.props
+
+    console.log('hll', beanCount)
+
+    if(beanCount >= 1000) {
+      // 减掉豆子
+      this.props.dispatch({type:'beans/subCount'})
+      this.setState({showMask: true, showNotPrize: true})
+    } else {
+      // 显示分享
+      this.setState({showMask: true, showNeedShare: true})
+    }
+
   }
 
   handleCloseAll = () => {
@@ -67,16 +97,20 @@ class Index extends Component {
   }
 
   handlePayment = (moeny, e) => {
-    payment(moeny)
+    // FIXME
     console.log('show moeny', moeny)
   }
 
   render () {
     console.log(111, this.props)
 
+    const {beanCount} = this.props
+
     return (
       <View className='main-root'>
-        <View className='title'>this is title</View>
+        <View className='title'>
+          <Image src={ImgTitle}/>
+        </View>
         <View className='container'>
           <View className='top-info'><View className='top-img' /></View>
           <View className='center-info'>
@@ -92,17 +126,18 @@ class Index extends Component {
                   <OpenData className='name' type='userNickName' />
                   <View className='num'>
                     <Image className='bean' src={IconBean} />
-                    <Text>{this.state.beansNum}</Text>
+                    <Text>{beanCount}</Text>
                   </View>
                 </View>
               </View>
-              <Button className='money-btn' onClick={this.handleShowPayment}>充值</Button>
+              <Button className='money-btn' openType='share'>分享领金豆</Button>
             </View>
           </View>
         </View>
 
         <View className={classnames('mask', {show: this.state.showMask})} />
 
+        {/*
         <View className={classnames('payment-root', {show: this.state.showPayment})}>
           <Image className='pay_bg' src={ImgPayBackground} />
           <Image className='icon-close' src={IconClose} onClick={this.handleCloseAll} />
@@ -111,10 +146,17 @@ class Index extends Component {
           <View className='pay pay_68' onClick={this.handlePayment.bind(this, 68)}><Image src={PayImg68} /></View>
           <View className='pay pay_168' onClick={this.handlePayment.bind(this, 168)}><Image src={PayImg168} /></View>
         </View>
+        */}
 
         <View className={classnames('no-prize', {show: this.state.showNotPrize})}>
           <Image className='img-not-prize' src={ImgNotPrize} />
           <Image className='img-again-btn' src={ImgPrizeAgainBtn} onClick={this.handleCloseAll} />
+        </View>
+
+        <View className={classnames('share-pop', {show: this.state.showNeedShare})}>
+          <Button className='img-need-share-btn' openType='share' >
+            <Image className='img-need-share-bg' src={ImgNeedShare} />
+          </Button>
         </View>
 
       </View>
