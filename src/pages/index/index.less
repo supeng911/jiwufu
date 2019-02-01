@@ -130,7 +130,10 @@
   backdrop-filter: blur(10px);
   background-color: rgba(0,0,0, 0.6);
   visibility: hidden;
+  opacity: 0;
+  transition: opacity 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
   &.show {
+    opacity: 1;
     visibility: visible;
   }
 }
@@ -144,6 +147,14 @@
   top: 50%;
   margin-top: -350px;
   z-index: 1010;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 300ms cubic-bezier(0.36, 0.66, 0.04, 1) 200ms;
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
   .pay_bg {
     position: absolute;
     z-index: 1;

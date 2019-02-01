@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, OpenData, Image, Text, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import classnames from 'classnames'
 import IconBean from '../../assets/icon_bean.png'
 import ImgHuahuaka from '../../assets/img_huahuaka.png'
 import ImgPayBackground from '../../assets/img_pay_background.png'
@@ -38,6 +39,8 @@ class Index extends Component {
 
   state = {
     beansNum: 1000,
+    showMask: false,
+    showPayment: false,
   }
 
   componentWillReceiveProps (nextProps) {
@@ -55,6 +58,10 @@ class Index extends Component {
   }
 
   componentDidHide () { }
+
+  handleShowPayment = () => {
+    this.setState({showMask: true, showPayment: true})
+  }
 
   render () {
     return (
@@ -79,16 +86,15 @@ class Index extends Component {
                   </View>
                 </View>
               </View>
-              <Button className='money-btn'>充值</Button>
+              <Button className='money-btn' onClick={this.handleShowPayment}>充值</Button>
             </View>
           </View>
         </View>
 
 
+        <View className={classnames('mask', {show: this.state.showMask})} />
 
-        <View className='mask show' />
-
-        <View className='payment-root'>
+        <View className={classnames('payment-root', {show: this.state.showPayment})}>
           <Image className='pay_bg' src={ImgPayBackground} />
           <View className='pay pay_6' ><Image src={PayImg6} /></View>
           <View className='pay pay_30' ><Image src={PayImg30} /></View>
