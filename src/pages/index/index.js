@@ -3,6 +3,12 @@ import { View, OpenData, Image, Text, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import IconBean from '../../assets/icon_bean.png'
 import ImgHuahuaka from '../../assets/img_huahuaka.png'
+import ImgPayBackground from '../../assets/img_pay_background.png'
+// pay
+import PayImg6 from '../../assets/pay-img-6.png'
+import PayImg30 from '../../assets/pay-img-30.png'
+import PayImg68 from '../../assets/pay-img-68.png'
+import PayImg168 from '../../assets/pay-img-168.png'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
 
@@ -54,7 +60,6 @@ class Index extends Component {
     return (
       <View className='main-root'>
         <View className='title'>this is title</View>
-
         <View className='container'>
           <View className='top-info'><View className='top-img' /></View>
           <View className='center-info'>
@@ -78,6 +83,19 @@ class Index extends Component {
             </View>
           </View>
         </View>
+
+
+
+        <View className='mask show' />
+
+        <View className='payment-root'>
+          <Image className='pay_bg' src={ImgPayBackground} />
+          <View className='pay pay_6' ><Image src={PayImg6} /></View>
+          <View className='pay pay_30' ><Image src={PayImg30} /></View>
+          <View className='pay pay_68' ><Image src={PayImg68} /></View>
+          <View className='pay pay_168' ><Image src={PayImg168} /></View>
+        </View>
+
 
       </View>
     )

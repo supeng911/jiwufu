@@ -116,3 +116,62 @@
   width: 590px;
   height: 843px;
 }
+
+
+
+.mask {
+  position: fixed;
+  overflow: hidden;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  background-color: rgba(0,0,0, 0.6);
+  visibility: hidden;
+  &.show {
+    visibility: visible;
+  }
+}
+
+
+.payment-root {
+  display: block;
+  width: 750px;
+  height: 700px;
+  position: fixed;
+  top: 50%;
+  margin-top: -350px;
+  z-index: 1010;
+  .pay_bg {
+    position: absolute;
+    z-index: 1;
+    width: 750px;
+    height: 700px;
+  }
+  .pay {
+    position: absolute;
+    z-index: 2;
+    image {
+      width: 241px;
+      height: 158px;
+    }
+  }
+  .pay_6 {
+    top: 360px;
+    left: 140px;
+  }
+  .pay_30 {
+    top: 360px;
+    left: 410px;
+  }
+  .pay_68 {
+    top: 520px;
+    left: 140px;
+  }
+  .pay_168 {
+    top: 520px;
+    left: 410px;
+  }
+}
