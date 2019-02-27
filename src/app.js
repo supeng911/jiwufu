@@ -43,7 +43,10 @@ class App extends Component {
     requiredBackgroundModes: ["audio"]
   }
 
-  componentDidMount () {}
+  async componentDidMount () {
+    const res = await Taro.login();
+    console.log('1111', res)
+  }
 
   componentDidShow () {}
 

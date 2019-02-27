@@ -3,6 +3,7 @@ import { View, OpenData, Image, Text, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import classnames from 'classnames'
 import ImgTitle from '../../assets/title.png'
+import ImgHeader from '../../assets/header.png'
 import IconBean from '../../assets/icon_bean.png'
 import ImgHuahuaka from '../../assets/img_huahuaka.png'
 
@@ -10,13 +11,7 @@ import ImgNotPrize from '../../assets/img_not_prize.png'
 import ImgPrizeAgainBtn from '../../assets/img_prize_again.png'
 import ImgNeedShare from '../../assets/img_need_share.png'
 
-// pay
-// import ImgPayBackground from '../../assets/img_pay_background.png'
-// import IconClose from '../../assets/icon-close.png'
-// import PayImg6 from '../../assets/pay-img-6.png'
-// import PayImg30 from '../../assets/pay-img-30.png'
-// import PayImg68 from '../../assets/pay-img-68.png'
-// import PayImg168 from '../../assets/pay-img-168.png'
+
 // utils
 
 import './index.less'
@@ -37,6 +32,7 @@ class Index extends Component {
   }
 
   state = {
+    backgroundAudioManager: null,
     showMask: false,
     showPayment: false,
     showNotPrize: false,
@@ -51,8 +47,9 @@ class Index extends Component {
     })
 
     return {
-      title: '花花卡大派送！',
+      title: '你的朋友送了你一张······[五福·花花卡]',
       path: '/pages/index/index',
+      imageUrl: "https://file.vbao100.com/weapp/cover.png"
     }
   }
 
@@ -65,14 +62,22 @@ class Index extends Component {
 
 
   componentDidShow () {
-    // const backgroundAudioManager = Taro.getBackgroundAudioManager()
+    // let {backgroundAudioManager} = this.state
+    // if(!backgroundAudioManager) {
+    //   backgroundAudioManager = Taro.getBackgroundAudioManager()
+    //   this.setState({backgroundAudioManager})
+    // }
     // backgroundAudioManager.src = 'https://file.vbao100.com/weapp/background.mp3'
     // backgroundAudioManager.title = '背景音乐'
-    // backgroundAudioManager.play()
+    // // backgroundAudioManager.play()
     // console.log('componentDidShow')
   }
 
-  componentDidHide () { }
+  componentDidHide () {
+    if(this.state.backgroundAudioManager) {
+      // this.state.backgroundAudioManager.stop()
+    }
+  }
 
 
   // 显示未中奖
@@ -102,8 +107,6 @@ class Index extends Component {
   }
 
   render () {
-    console.log(111, this.props)
-
     const {beanCount} = this.props
 
     return (
@@ -112,7 +115,10 @@ class Index extends Component {
           <Image src={ImgTitle}/>
         </View>
         <View className='container'>
-          <View className='top-info'><View className='top-img' /></View>
+          <View className='top-info'>
+            <Image className='top-img' src={ImgHeader}/>
+            {/*<View className='top-img' />*/}
+          </View>
           <View className='center-info'>
             <Image className='huahuaka-img' src={ImgHuahuaka} onClick={this.handleShowPrize} />
           </View>
@@ -130,7 +136,7 @@ class Index extends Component {
                   </View>
                 </View>
               </View>
-              <Button className='money-btn' openType='share'>分享领金豆</Button>
+              <Button className='money-btn' openType='share'>分享得1000豆</Button>
             </View>
           </View>
         </View>
@@ -148,6 +154,7 @@ class Index extends Component {
         </View>
         */}
 
+        {/*未中奖*/}
         <View className={classnames('no-prize', {show: this.state.showNotPrize})}>
           <Image className='img-not-prize' src={ImgNotPrize} />
           <Image className='img-again-btn' src={ImgPrizeAgainBtn} onClick={this.handleCloseAll} />
